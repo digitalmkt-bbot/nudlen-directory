@@ -222,7 +222,7 @@
     const thumb = c.img
       ? `<img src="${c.img}" alt="${c.title}" loading="lazy" onerror="this.style.display='none'"><span class="init">${c.init}</span>`
       : `<span class="init">${c.init}</span>`;
-    const soon = c.link ? '' : `<span class="soon">เร็ว ๆ นี้</span>`;
+    const soon = '';
     const dom = c.dom ? c.dom : 'อยู่ระหว่างพัฒนา';
     const openTag = c.link ? `href="${c.link}" target="_blank" rel="noopener"` : `aria-disabled="true"`;
     return `<a class="card ${c.link?'':'dis'}" ${openTag} style="animation-delay:${i*40}ms">
