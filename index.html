@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>System Love Andaman · Vibe Coding System Hub</title>
+<meta name="description" content="รวมเว็บและแอปที่ทีม System Love Andaman สร้างและแชร์ไว้ในที่เดียว — เข้าใช้ระบบภายในทั้งหมดได้จากหน้านี้">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23FF611E' stroke='%23101828' stroke-width='7'/%3E%3Ctext x='50' y='72' font-size='58' font-family='Poppins,Arial' font-weight='800' text-anchor='middle' fill='%23fff'%3ES%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --ink:#101828; --paper:#F1F6F1; --white:#fff;
+    --slate:#4A5468; --slate2:#7A6F6D; --sage:#B9C3B9;
+    --orange:#FF611E; --purple:#6E61FF; --gold:#FFDFA8;
+    --poppins:'Poppins',sans-serif;
+    --anuphan:'Anuphan',sans-serif;
+    --mono:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--anuphan); color:var(--ink); background:var(--paper);
+    -webkit-font-smoothing:antialiased; line-height:1.5;
+    background-image:radial-gradient(#d9e2d9 1.4px, transparent 1.4px);
+    background-size:26px 26px;
+  }
+  a{text-decoration:none;color:inherit}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 22px}
+  .ink{color:var(--ink)}
+
+  /* sticker card shell */
+  .stk{border:3px solid var(--ink);box-shadow:7px 8px 0 var(--ink)}
+  .stk-sm{border:2px solid var(--ink);box-shadow:4px 5px 0 var(--ink)}
+
+  /* ---------- Top bar ---------- */
+  header.top{position:sticky;top:0;z-index:50;background:var(--gold);border-bottom:3px solid var(--ink)}
+  .top .wrap{display:flex;align-items:center;justify-content:space-between;height:62px;gap:14px}
+  .brand{display:flex;align-items:center;gap:11px;font-family:var(--poppins);font-weight:800;font-size:20px;letter-spacing:-.02em}
+  .brand .mark{
+    width:36px;height:36px;border-radius:11px;background:var(--orange);color:#fff;border:2.5px solid var(--ink);
+    display:grid;place-items:center;font-size:19px;box-shadow:3px 3px 0 var(--ink);transform:rotate(-4deg)
+  }
+  .brand .p{color:var(--purple)}
+  .top .tag{
+    font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    background:var(--ink);color:var(--gold);padding:6px 12px;border-radius:999px
+  }
+  @media(max-width:600px){.top .tag{display:none}}
+
+  /* ---------- Hero ---------- */
+  .hero-outer{padding:30px 0 6px}
+  .hero{
+    background:var(--paper);border:3px solid var(--ink);border-radius:28px;box-shadow:10px 12px 0 var(--ink);
+    padding:30px 30px 46px;position:relative;overflow:hidden
+  }
+  .hero .brandline{font-family:var(--poppins);font-weight:800;font-size:21px;color:var(--purple)}
+  .hero .brandline b{color:var(--ink);font-weight:800}
+  .hero-mid{display:flex;flex-direction:column;align-items:center;text-align:center;padding:44px 0 0}
+  .htitle{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px;
+    font-family:var(--poppins);font-weight:800;line-height:1.18;letter-spacing:-.025em;
+    font-size:clamp(34px,6.6vw,60px);color:var(--ink)}
+  .pill-vibe{
+    display:inline-block;background:var(--orange);color:#fff;border:3px solid var(--ink);border-radius:999px;
+    padding:2px 26px 8px;box-shadow:6px 7px 0 var(--ink);transform:rotate(-2.5deg)
+  }
+  .star{width:clamp(34px,5vw,46px);height:clamp(34px,5vw,46px);background:var(--orange);display:inline-block;
+    clip-path:polygon(50% 0,61% 32%,95% 12%,79% 45%,100% 50%,79% 61%,95% 88%,61% 74%,50% 100%,39% 74%,5% 88%,21% 61%,0 50%,21% 39%,5% 12%,39% 26%)}
+  .hlede{max-width:600px;margin:24px auto 0;font-family:var(--anuphan);font-size:clamp(15px,1.8vw,18px);line-height:1.7;color:var(--slate)}
+  /* floating deco stickers */
+  .deco{position:absolute;font-size:26px;user-select:none;pointer-events:none;opacity:.9}
+
+  /* ---------- Systems section ---------- */
+  .sys{padding:44px 0 10px;text-align:center}
+  .sys h2{font-family:var(--anuphan);font-weight:800;font-size:clamp(28px,4vw,38px);letter-spacing:-.02em}
+  .sys .sub{font-family:var(--anuphan);font-size:16px;color:var(--slate);margin-top:9px}
+
+  .searchbar{display:flex;align-items:center;gap:14px;max-width:720px;margin:30px auto 0;padding:14px 18px;
+    background:#fff;border:3px solid var(--ink);border-radius:16px;box-shadow:5px 6px 0 var(--ink)}
+  .searchbar span.ic{font-size:19px}
+  .searchbar input{flex:1;font-family:var(--anuphan);font-size:16px;color:var(--ink);background:transparent;border:none;outline:none}
+  .searchbar input::placeholder{color:#9aa0a6}
+  .searchbar .kbd{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--ink);
+    background:var(--gold);border:2px solid var(--ink);border-radius:8px;padding:5px 9px}
+
+  .chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px auto 0;max-width:900px}
+  .chip{cursor:pointer;user-select:none;font-family:var(--poppins);font-weight:700;font-size:13px;color:var(--ink);
+    background:#fff;border:2px solid var(--ink);border-radius:999px;padding:8px 15px;box-shadow:3px 3px 0 var(--ink);
+    transition:transform .12s,box-shadow .12s;display:inline-flex;align-items:center;gap:7px}
+  .chip .em{font-family:var(--anuphan)}
+  .chip:hover{transform:translate(-1px,-2px);box-shadow:5px 5px 0 var(--ink)}
+  .chip.active{background:var(--orange);color:#fff}
+  .countline{font-family:var(--mono);font-size:12.5px;color:var(--slate2);margin:18px 0 0;text-align:center}
+
+  /* ---------- Grid ---------- */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin:34px 0 0}
+  @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr);gap:22px}}
+  @media(max-width:600px){.grid{grid-template-columns:1fr}}
+  .card{display:flex;flex-direction:column;background:var(--paper);border:3px solid var(--ink);border-radius:22px;
+    box-shadow:7px 8px 0 var(--ink);transition:transform .16s,box-shadow .16s;overflow:hidden;animation:pop .35s both}
+  @keyframes pop{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .card:hover{transform:translate(-3px,-4px);box-shadow:11px 13px 0 var(--ink)}
+  .card.dis{opacity:.92}
+  .thumb{height:168px;position:relative;display:flex;align-items:center;justify-content:center;
+    border-bottom:3px solid var(--ink);border-radius:19px 19px 0 0;overflow:hidden}
+  .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;z-index:1}
+  .thumb .init{font-family:var(--poppins);font-size:44px;font-weight:800;color:var(--ink);opacity:.6}
+  .soon{position:absolute;top:10px;right:10px;z-index:3;font-family:var(--poppins);font-weight:700;font-size:11px;
+    color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:999px;padding:4px 10px;box-shadow:2px 2px 0 var(--ink);transform:rotate(3deg)}
+  .cbody{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .ctitle{font-family:var(--poppins);font-weight:800;font-size:19px;letter-spacing:-.015em;color:var(--ink)}
+  .cdesc{font-family:var(--anuphan);font-size:14px;line-height:1.6;color:var(--slate);min-height:44px;flex:1}
+  .cfoot{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;padding-top:13px;border-top:2px dashed var(--sage)}
+  .cdom{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--purple);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:60%}
+  .cpill{display:inline-flex;align-items:center;gap:5px;font-family:var(--poppins);font-weight:700;font-size:11px;color:var(--ink);
+    background:#fff;border:2px solid var(--ink);border-radius:999px;padding:4px 11px}
+  .empty{grid-column:1/-1;text-align:center;font-family:var(--anuphan);color:var(--slate2);padding:40px;font-size:16px}
+
+  /* ---------- Footer ---------- */
+  footer{margin-top:52px;border-top:3px solid var(--ink);background:var(--gold)}
+  footer .wrap{padding:26px 22px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+  .fbrand{font-family:var(--poppins);font-weight:800;display:flex;align-items:center;gap:9px}
+  .fbrand .mark{width:30px;height:30px;font-size:16px;border-radius:9px;box-shadow:2px 2px 0 var(--ink)}
+  footer .note{font-family:var(--anuphan);font-size:13.5px;color:var(--ink)}
+  footer .stamp{font-family:var(--mono);font-size:11.5px;color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:999px;padding:5px 12px}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span class="mark">S</span><span><span class="p">System</span> Love Andaman</span></div>
+    <span class="tag">Vibe Coding Directory</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero-outer">
+    <div class="hero">
+      <span class="deco" style="top:16px;right:28px;transform:rotate(12deg)">✨</span>
+      <span class="deco" style="bottom:20px;left:30px;transform:rotate(-8deg);font-size:22px">⭐</span>
+      <span class="deco" style="bottom:26px;right:34px;font-size:20px;transform:rotate(-14deg)">🧩</span>
+      <div class="brandline">System <b>Love Andaman</b></div>
+      <div class="hero-mid">
+        <div class="htitle"><span class="pill-vibe">Vibe Coding</span></div>
+        <div class="htitle" style="margin-top:8px"><span>System Hub</span><span class="star"></span></div>
+        <p class="hlede">รวมเว็บและแอปที่ทีม System Love Andaman สร้างและแชร์ไว้ในที่เดียว — เข้าใช้ระบบภายในทั้งหมดได้จากหน้านี้</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sys">
+    <h2>ระบบภายใน</h2>
+    <div class="sub">คลิกการ์ดเพื่อเข้าใช้ระบบได้ทันที</div>
+
+    <label class="searchbar">
+      <span class="ic">🔍</span>
+      <input id="q" type="search" placeholder="ค้นหาระบบ ชื่อโปรเจกต์ หรือหมวด... / Search systems" autocomplete="off">
+      <span class="kbd">⌘K</span>
+    </label>
+
+    <div class="chips" id="chips"></div>
+    <div class="countline" id="count"></div>
+  </section>
+
+  <div class="wrap" style="padding:0">
+    <div class="grid" id="grid"></div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fbrand"><span class="mark brand-mark" style="background:var(--orange);color:#fff;border:2.5px solid var(--ink);display:grid;place-items:center;transform:rotate(-4deg)">S</span> System Love Andaman</div>
+    <span class="note">สร้างและแชร์โดยทีม Love Andaman · ระบบภายในและ workflows ที่ทำเอง ใช้เอง</span>
+    <span class="stamp">System-Hub · Vibe Coding</span>
+  </div>
+</footer>
+
+<script>
+  const STICKER = ['#DAC3FF','#FFA352','#ADDEFE','#99D9B3','#FFDFA8','#60AEFE','#DAC3FF','#FFA352'];
+  const CATS = [
+    {name:'ทั้งหมด', em:'✨'},
+    {name:'อนุมัติ & ค่าใช้จ่าย', em:'💰'},
+    {name:'ร้านค้า & อีคอมเมิร์ซ', em:'🛍'},
+    {name:'Productivity', em:'⚡'},
+    {name:'ธุรกิจ & บริการ', em:'💼'},
+  ];
+  const BASE = [
+    {title:'MEMO', init:'MO', cat:'อนุมัติ & ค่าใช้จ่าย', dom:'memo.loveandaman.com',
+     desc:'บันทึกเรื่องทั่วไป · ขออนุมัติได้หลากหลายประเภท', img:'memo-preview.png',
+     link:'https://memo.loveandaman.com'},
+    {title:'PR/PO', init:'PP', cat:'อนุมัติ & ค่าใช้จ่าย', dom:'prpo-system-production.up.railway.app',
+     desc:'ใบขอซื้อและใบสั่งซื้อ · ติดตามสถานะอนุมัติ', img:'prpo-preview.png',
+     link:'https://prpo-system-production.up.railway.app/'},
+    {title:'BEASY BOOKING', init:'BB', cat:'ร้านค้า & อีคอมเมิร์ซ', dom:'beasybooking.com',
+     desc:'ระบบ Booking Counter — Andaman Sunday', img:'beasy-preview-v2.png',
+     link:'https://beasybooking.com/'},
+    {title:'TRACK DIGITAL MARKETING', init:'TM', cat:'Productivity', dom:'digitalmkt-bbot.github.io',
+     desc:'ติดตามแคมเปญและวัดผลการตลาดแบบเรียลไทม์', img:'trakking-preview.png',
+     link:'https://digitalmkt-bbot.github.io/love_andaman_tracker/?v=login5'},
+    {title:'Voucher', init:'VC', cat:'อนุมัติ & ค่าใช้จ่าย', dom:'voucher-gen.up.railway.app',
+     desc:'ระบบออกและอนุมัติใบสำคัญจ่าย (Voucher)', img:'voucher-preview.png',
+     link:'https://voucher-gen.up.railway.app/'},
+    {title:'SALES AGENT', init:'SA', cat:'ธุรกิจ & บริการ', dom:'salesagent.beasybooking.com',
+     desc:'ติดตามและอัพเดตสถานะ Agent', img:'salesagent-preview-v2.png',
+     link:'https://salesagent.beasybooking.com'},
+    {title:'OFFICE BOOKING', init:'OB', cat:'Productivity', dom:'officebooking.loveandaman.com',
+     desc:'ระบบสำหรับจองการใช้รถ, การใช้ห้องประชุม', img:'booking-preview.png',
+     link:'https://officebooking.loveandaman.com/'},
+    {title:'RSVN/B2B', init:'RB', cat:'ธุรกิจ & บริการ', dom:'rsvn.loveandaman.com',
+     desc:'ระบบสำรองที่นั่งและงานคู่ค้า B2B', img:'rsvn-preview.png', link:''},
+    {title:'CS/B2C', init:'CS', cat:'ธุรกิจ & บริการ', dom:'cs.loveandaman.com',
+     desc:'ระบบจองและวอชเชอร์สำหรับลูกค้าทั่วไป', img:'cs-preview.png',
+     link:'https://cs.loveandaman.com'},
+  ];
+  const CARDS = BASE.map((p,i)=>({...p, sticker:STICKER[i%8]}));
+
+  function cardHTML(c,i){
+    const thumb = c.img
+      ? `<img src="${c.img}" alt="${c.title}" loading="lazy" onerror="this.style.display='none'"><span class="init">${c.init}</span>`
+      : `<span class="init">${c.init}</span>`;
+    const soon = c.link ? '' : `<span class="soon">เร็ว ๆ นี้</span>`;
+    const dom = c.dom ? c.dom : 'อยู่ระหว่างพัฒนา';
+    const openTag = c.link ? `href="${c.link}" target="_blank" rel="noopener"` : `aria-disabled="true"`;
+    return `<a class="card ${c.link?'':'dis'}" ${openTag} style="animation-delay:${i*40}ms">
+      <div class="thumb" style="background:${c.sticker}">${soon}${thumb}</div>
+      <div class="cbody">
+        <div class="ctitle">${c.title}</div>
+        <div class="cdesc">${c.desc}</div>
+        <div class="cfoot">
+          <span class="cdom">${dom}</span>
+          <span class="cpill">Click!</span>
+        </div>
+      </div>
+    </a>`;
+  }
+
+  let active='ทั้งหมด';
+  const chipsEl=document.getElementById('chips');
+  chipsEl.innerHTML=CATS.map(c=>`<span class="chip ${c.name===active?'active':''}" data-cat="${c.name}"><span class="em">${c.em}</span>${c.name}</span>`).join('');
+  const grid=document.getElementById('grid'), qEl=document.getElementById('q'), countEl=document.getElementById('count');
+
+  function render(){
+    const q=qEl.value.trim().toLowerCase();
+    const list=CARDS.filter(c=>{
+      const okCat=active==='ทั้งหมด'||c.cat===active;
+      const okQ=!q||(c.title+' '+c.desc+' '+c.dom+' '+c.cat).toLowerCase().includes(q);
+      return okCat&&okQ;
+    });
+    grid.innerHTML=list.length?list.map(cardHTML).join(''):`<div class="empty">ไม่พบระบบที่ตรงกับ “${qEl.value}” 🙈 ลองคำอื่นดูนะ</div>`;
+    countEl.textContent=`แสดง ${list.length} จาก ${CARDS.length} ระบบ`;
+  }
+  chipsEl.addEventListener('click',e=>{const ch=e.target.closest('.chip');if(!ch)return;active=ch.dataset.cat;[...chipsEl.children].forEach(x=>x.classList.toggle('active',x.dataset.cat===active));render();});
+  qEl.addEventListener('input',render);
+  document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();qEl.focus();}});
+  render();
+</script>
+</body>
+</html>
