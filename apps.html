@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>แอปทั้งหมด · Andaman Hub</title>
+<meta name="description" content="ระบบภายในทั้งหมดของ Love Andaman แยกตามหมวด — อนุมัติ การจอง งานออฟฟิศ รายงาน">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hd">
+  <div class="wrap">
+    <div class="hd-l">
+      <a class="brand" href="index.html">
+        <img src="favicon.svg" width="38" height="38" alt="">
+        <b>andaman<span>hub</span></b>
+      </a>
+      <nav class="nav" aria-label="เมนูหลัก">
+        <a class="on" href="apps.html" aria-current="page">แอป</a>
+        <a href="#approve">หมวดหมู่</a>
+        <a href="index.html#request">ช่วยเหลือ</a>
+      </nav>
+    </div>
+    <a class="btn btn-s" href="index.html"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>หน้าแรก</a>
+  </div>
+</header>
+
+<main>
+  <section class="wrap" style="padding-top:88px;padding-bottom:24px;text-align:center">
+    <h1 class="h1" style="margin:0;font-size:68px;line-height:1.1;font-weight:700">หนึ่งงาน <span style="color:var(--orange)">หนึ่งระบบ</span></h1>
+    <p style="margin:18px 0 0;font-size:22px;color:var(--ink-2)">เพิ่มได้เรื่อย ๆ ตามงานของทีม</p>
+    <form class="search" role="search" style="margin:36px auto 0;max-width:560px" onsubmit="return false">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#5B6472" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <label for="q" class="sr">ค้นหาแอป</label>
+      <input id="q" type="search" placeholder="ค้นหาแอป เช่น Voucher, PR/PO, จองรถ…" autocomplete="off">
+      <span class="kbd" id="kbd">⌘K</span>
+    </form>
+    <div id="chips" role="group" aria-label="กรองตามหมวด" style="margin-top:28px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px"></div>
+    <p id="count" aria-live="polite" style="margin:18px 0 0;font-size:14px;color:var(--muted)"></p>
+  </section>
+
+  <div id="sections"></div>
+  <p id="empty" class="empty wrap" hidden></p>
+
+  <section class="wrap" style="padding-top:112px;padding-bottom:80px;text-align:center">
+    <h2 style="margin:0;font-size:44px;font-weight:700;line-height:1.25">เติบโตไปพร้อมทีม <span style="color:var(--orange)">อย่างไร้ขีดจำกัด</span></h2>
+    <p style="margin:14px 0 0;font-size:18px;color:var(--ink-2)">ยังไม่มีระบบที่ต้องการ? บอกทีม System แล้วเราจะสร้างและเพิ่มเข้า Hub ให้</p>
+    <div style="margin-top:30px;display:flex;flex-wrap:wrap;justify-content:center;gap:12px">
+      <a class="btn btn-p btn-lg" href="index.html#request" style="font-weight:700">ขอระบบใหม่</a>
+      <a class="btn btn-s btn-lg" href="index.html">กลับหน้าแรก</a>
+    </div>
+  </section>
+</main>
+
+<footer class="ft">
+  <div class="wrap">
+    <span>© 2026 Love Andaman · ระบบภายใน สร้างเอง ใช้เอง</span>
+    <span>System Hub · Vibe Coding</span>
+  </div>
+</footer>
+
+<script src="apps.js"></script>
+<script>
+  (function () {
+    var cats = HUB_CATS, apps = HUB_APPS, active = 'all';
+    var qEl = document.getElementById('q');
+    var chipsEl = document.getElementById('chips');
+    var secEl = document.getElementById('sections');
+    var countEl = document.getElementById('count');
+    var emptyEl = document.getElementById('empty');
+
+    if (!/Mac|iPhone|iPad/.test(navigator.platform || '')) document.getElementById('kbd').textContent = 'Ctrl K';
+
+    chipsEl.innerHTML = [{ id: 'all', name: 'ทั้งหมด' }].concat(cats).map(function (c) {
+      return '<button type="button" class="chip" data-cat="' + c.id + '" aria-pressed="' + (c.id === active) + '">' + hubEsc(c.name) + '</button>';
+    }).join('');
+
+    function card(a) {
+      return '<a class="card" href="' + hubEsc(a.url) + '" target="_blank" rel="noopener">' +
+        '<span class="ic ic-md">' + hubIcon(a.icon) + '</span>' +
+        '<span><div class="n">' + hubEsc(a.name) + '</div><div class="d">' + hubEsc(a.desc) + '</div></span></a>';
+    }
+
+    function render() {
+      var q = qEl.value.trim().toLowerCase(), shown = 0, first = true;
+      secEl.innerHTML = cats.map(function (c) {
+        if (active !== 'all' && active !== c.id) return '';
+        var list = apps.filter(function (a) {
+          if (a.cat !== c.id) return false;
+          if (!q) return true;
+          return (a.name + ' ' + a.short + ' ' + a.desc + ' ' + a.url + ' ' + c.name).toLowerCase().indexOf(q) > -1;
+        });
+        if (!list.length) return '';
+        shown += list.length;
+        var pad = first ? 72 : 88; first = false;
+        return '<section id="' + c.id + '" class="wrap" style="padding-top:' + pad + 'px">' +
+          '<div class="sec-h"><h2>' + hubEsc(c.name) + '</h2><span>' + list.length + ' แอป</span></div>' +
+          '<div class="grid3">' + list.map(card).join('') + '</div></section>';
+      }).join('');
+      countEl.textContent = 'แสดง ' + shown + ' จาก ' + apps.length + ' แอป';
+      emptyEl.hidden = shown > 0;
+      if (!shown) emptyEl.textContent = 'ไม่พบแอปที่ตรงกับ “' + qEl.value + '” ลองคำอื่นดูนะ';
+    }
+
+    chipsEl.addEventListener('click', function (e) {
+      var b = e.target.closest('.chip'); if (!b) return;
+      active = b.getAttribute('data-cat');
+      Array.prototype.forEach.call(chipsEl.children, function (x) {
+        x.setAttribute('aria-pressed', String(x.getAttribute('data-cat') === active));
+      });
+      render();
+    });
+    qEl.addEventListener('input', render);
+    document.addEventListener('keydown', function (e) {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); qEl.focus(); qEl.select(); }
+      if (e.key === 'Escape' && document.activeElement === qEl) { qEl.value = ''; render(); }
+    });
+
+    render();
+    if (location.hash) { var t = document.querySelector(location.hash); if (t) t.scrollIntoView(); }
+  })();
+</script>
+</body>
+</html>
